@@ -3,171 +3,145 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MindShift Daily — Small Daily Shifts, Real Personal Growth</title>
-<meta name="description" content="Practical morning routines, habit-building guides and motivation for people who want steady, realistic self-improvement — one day at a time.">
-<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<title>MindShift Daily — Small shifts, repeated daily</title>
+<meta name="description" content="MindShift Daily is a practical guide to morning routines, habit-building and steady personal growth — no hype, just what actually works when you try it tomorrow.">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<div class="log-line" aria-hidden="true"></div>
+
 <header class="site-header">
-  <div class="wrap">
-    <a href="index.html" class="logo"><img src="images/logo.svg" alt="MindShift Daily"></a>
-    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="index.html#categories">Categories</a></li>
-        <li><a href="index.html#articles">Latest</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+  <div class="wrap header-inner">
+    <a href="index.html" class="wordmark">
+      <span class="wordmark-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <circle cx="12" cy="12" r="6" fill="var(--dawn)"/>
+        </svg>
+      </span>
+      MindShift Daily
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="categories.html">Categories</a>
+      <a href="latest.html">Latest</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap">
-    <div>
-      <span class="eyebrow">Daily 05:47 — sunrise habits</span>
-      <h1>Small <em>shifts</em>, repeated daily, become who you are.</h1>
-      <p class="lead">MindShift Daily is a practical guide to morning routines, habit-building and steady personal growth — no hype, just what actually works when you try it tomorrow.</p>
-      <div class="hero-actions">
-        <a href="index.html#articles" class="btn btn-primary">Read the latest</a>
-        <a href="index.html#categories" class="btn btn-outline">Browse categories</a>
-      </div>
-    </div>
-    <div class="arc-wrap">
-      <svg class="arc-svg" viewBox="0 0 300 200">
-        <path class="arc-path" d="M20 160 A130 130 0 0 1 280 160"/>
-        <path class="arc-progress" d="M20 160 A130 130 0 0 1 280 160"/>
-        <circle class="arc-sun" cx="150" cy="30" r="14"/>
-        <text class="arc-label" x="20" y="185">SUNRISE</text>
-        <text class="arc-label" x="245" y="185">DUSK</text>
-      </svg>
-    </div>
-  </div>
-</section>
+<main>
 
-<section class="section" id="categories">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Explore</span>
-      <h2>Five ways to grow, every day</h2>
-      <p>Pick a starting point. Every category is built around one honest question: what can I realistically do today?</p>
+  <section class="hero wrap">
+    <p class="timestamp">Daily <span class="mono">05:47</span> — sunrise habits</p>
+    <h1>Small <em>shifts</em>, repeated daily, become who you are.</h1>
+    <p class="lede">MindShift Daily is a practical guide to morning routines, habit-building and steady personal growth — no hype, just what actually works when you try it tomorrow.</p>
+    <div class="hero-actions">
+      <a href="latest.html" class="btn btn-primary">Read the latest</a>
+      <a href="categories.html" class="btn btn-ghost">Browse categories</a>
     </div>
+  </section>
+
+  <section class="log wrap" aria-label="Recent entries">
+    <div class="log-header">
+      <h2>The log</h2>
+      <p>Entries, stamped by the moment they were written.</p>
+    </div>
+
+    <article class="entry">
+      <div class="entry-time">
+        <span class="mono">06:12</span>
+        <span class="entry-day">Mon</span>
+      </div>
+      <div class="entry-body">
+        <p class="entry-tag">Morning routines</p>
+        <h3><a href="#">The five-minute rule that fixed my mornings</a></h3>
+        <p>You don't need a two-hour routine. You need one small thing you can't talk yourself out of — here's how to find yours.</p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-time">
+        <span class="mono">21:03</span>
+        <span class="entry-day">Wed</span>
+      </div>
+      <div class="entry-body">
+        <p class="entry-tag">Habit-building</p>
+        <h3><a href="#">Why your habit tracker is quietly working against you</a></h3>
+        <p>Streaks feel motivating until the day you break one. A steadier way to measure progress that survives a bad week.</p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-time">
+        <span class="mono">05:47</span>
+        <span class="entry-day">Fri</span>
+      </div>
+      <div class="entry-body">
+        <p class="entry-tag">Personal growth</p>
+        <h3><a href="#">The boring version of discipline actually works</a></h3>
+        <p>No cold plunges, no 4 a.m. wake-ups. What steady, unglamorous progress actually looks like day to day.</p>
+      </div>
+    </article>
+
+    <div class="log-footer">
+      <a href="latest.html" class="btn btn-ghost">See all entries →</a>
+    </div>
+  </section>
+
+  <section class="categories wrap" aria-label="Categories">
+    <h2>Browse by category</h2>
     <div class="cat-grid">
-      <div class="cat-card">
-        <span class="cat-tag">06:00</span>
-        <h3>Morning Routines</h3>
-        <p>Wake-up systems, sunlight, and the first hour that sets your whole day.</p>
-      </div>
-      <div class="cat-card">
-        <span class="cat-tag">Focus</span>
-        <h3>Productivity</h3>
-        <p>Deep work, planning methods and cutting distraction without burning out.</p>
-      </div>
-      <div class="cat-card">
-        <span class="cat-tag">Mind</span>
-        <h3>Mental Wellness</h3>
-        <p>Stress management, mindfulness and staying grounded on hard days.</p>
-      </div>
-      <div class="cat-card">
-        <span class="cat-tag">Repeat</span>
-        <h3>Habit Building</h3>
-        <p>How habits actually form, and how to make good ones stick.</p>
-      </div>
-      <div class="cat-card">
-        <span class="cat-tag">Voice</span>
-        <h3>Motivation &amp; Stories</h3>
-        <p>Real accounts of change, and ideas worth carrying into your day.</p>
-      </div>
+      <a class="cat-card" href="#">
+        <span class="cat-time mono">AM</span>
+        <span class="cat-name">Morning Routines</span>
+      </a>
+      <a class="cat-card" href="#">
+        <span class="cat-time mono">21d</span>
+        <span class="cat-name">Habit-Building</span>
+      </a>
+      <a class="cat-card" href="#">
+        <span class="cat-time mono">∞</span>
+        <span class="cat-name">Personal Growth</span>
+      </a>
+      <a class="cat-card" href="#">
+        <span class="cat-time mono">PM</span>
+        <span class="cat-name">Evening Resets</span>
+      </a>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section section-alt" id="articles">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Latest</span>
-      <h2>Fresh from the journal</h2>
-      <p>Replace these with your own posts once your content is ready.</p>
-    </div>
-    <div class="article-grid">
-      <article class="article-card">
-        <div class="article-thumb"></div>
-        <div class="article-body">
-          <span class="article-meta">Morning Routines · 6 min read</span>
-          <h3>The First 10 Minutes After You Wake Up</h3>
-          <p>Why the choices you make before checking your phone shape the rest of your day — and a simple sequence to try tomorrow.</p>
-          <span class="read-more">Read article →</span>
-        </div>
-      </article>
-      <article class="article-card">
-        <div class="article-thumb"></div>
-        <div class="article-body">
-          <span class="article-meta">Habit Building · 8 min read</span>
-          <h3>Why Small Habits Beat Big Resolutions</h3>
-          <p>The science of habit stacking, and how to design routines that survive a bad week.</p>
-          <span class="read-more">Read article →</span>
-        </div>
-      </article>
-      <article class="article-card">
-        <div class="article-thumb"></div>
-        <div class="article-body">
-          <span class="article-meta">Mental Wellness · 5 min read</span>
-          <h3>A 3-Minute Reset for Overwhelmed Days</h3>
-          <p>A short grounding practice you can use at your desk, no app or equipment required.</p>
-          <span class="read-more">Read article →</span>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="newsletter">
+  <section class="subscribe wrap">
+    <div class="subscribe-inner">
       <div>
-        <h2>One honest tip, every morning.</h2>
-        <p>Join the newsletter for a short, practical email — no fluff, unsubscribe anytime.</p>
+        <h2>One shift a week, in your inbox</h2>
+        <p>Short, practical, no hype. Unsubscribe whenever.</p>
       </div>
-      <form class="news-form">
-        <input type="email" placeholder="you@email.com" required>
+      <form class="subscribe-form" onsubmit="return false;">
+        <label for="email" class="visually-hidden">Email address</label>
+        <input id="email" type="email" placeholder="you@example.com" required>
         <button type="submit" class="btn btn-primary">Subscribe</button>
       </form>
     </div>
-  </div>
-</section>
+  </section>
+
+</main>
 
 <footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-col footer-about">
-        <img src="images/logo.svg" alt="MindShift Daily" style="height:30px;">
-        <p>Practical, no-hype guidance for people building better mornings and steadier days.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Site</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="privacy.html">Privacy Policy</a></li>
-          <li><a href="disclaimer.html">Disclaimer</a></li>
-          <li><a href="terms.html">Terms of Use</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 MindShift Daily. All rights reserved.</span>
-      <span>Made for readers in the UK &amp; US.</span>
-    </div>
+  <div class="wrap footer-inner">
+    <p>© 2026 MindShift Daily. Small shifts, daily.</p>
+    <nav class="footer-nav">
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="terms.html">Terms</a>
+    </nav>
   </div>
 </footer>
 
