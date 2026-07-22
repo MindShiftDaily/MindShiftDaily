@@ -5,10 +5,478 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MindShift Daily — Small shifts, repeated daily</title>
 <meta name="description" content="MindShift Daily is a practical guide to morning routines, habit-building and steady personal growth — no hype, just what actually works when you try it tomorrow.">
-<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIj4KICA8cmVjdCB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHJ4PSI2IiBmaWxsPSIjMjQ0NDNEIi8+CiAgPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iNyIgZmlsbD0iI0U4QTMzRCIvPgo8L3N2Zz4K" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<style>
+/* ==========================================================================
+   MindShift Daily — Design tokens
+   ========================================================================== */
+:root {
+  --paper: #EEF0EA;
+  --paper-raised: #F7F8F3;
+  --ink: #1B1F1D;
+  --ink-soft: #4B5049;
+  --line: #D8DBCF;
+  --dawn: #E8A33D;
+  --dawn-soft: #F3D9AC;
+  --teal: #3A6B62;
+  --teal-deep: #24443D;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --wrap: 760px;
+  --radius: 3px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+a { color: var(--teal-deep); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--dawn); }
+
+.mono { font-family: var(--font-mono); }
+
+:focus-visible {
+  outline: 2px solid var(--dawn);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Signature: a thin gradient line at the very top of the page,
+   representing a sunrise sweeping across a 24h clock */
+.log-line {
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg,
+    var(--teal-deep) 0%,
+    var(--teal) 22%,
+    var(--dawn-soft) 45%,
+    var(--dawn) 52%,
+    var(--dawn-soft) 60%,
+    var(--teal) 78%,
+    var(--teal-deep) 100%);
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(238, 240, 234, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.wordmark:hover { color: var(--ink); }
+.wordmark-icon { display: inline-flex; }
+
+.site-nav {
+  display: flex;
+  gap: 28px;
+}
+.site-nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.site-nav a:hover { color: var(--dawn); }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 34px;
+  height: 34px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.nav-toggle span {
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero {
+  padding: 72px 24px 48px;
+}
+
+.timestamp {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0 0 18px;
+  letter-spacing: 0.02em;
+}
+.timestamp .mono { color: var(--teal-deep); font-weight: 500; }
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 5vw, 3.2rem);
+  line-height: 1.12;
+  margin: 0 0 24px;
+  max-width: 14ch;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--teal-deep);
+}
+
+.lede {
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+  max-width: 52ch;
+  margin: 0 0 32px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 22px;
+  border-radius: var(--radius);
+  font-size: 0.94rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.btn-primary {
+  background: var(--teal-deep);
+  color: var(--paper-raised);
+}
+.btn-primary:hover {
+  background: var(--dawn);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.btn-ghost:hover {
+  border-color: var(--dawn);
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Log / entries
+   ========================================================================== */
+.log {
+  padding: 40px 24px 24px;
+}
+
+.log-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.log-header h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin: 0;
+}
+.log-header p {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 20px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.entry-time {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+.entry-time .mono {
+  font-size: 0.95rem;
+  color: var(--teal-deep);
+  font-weight: 500;
+}
+.entry-day {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+
+.entry-tag {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dawn);
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.entry-body h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+.entry-body h3 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.entry-body h3 a:hover { color: var(--dawn); }
+
+.entry-body p:last-child {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+  max-width: 56ch;
+}
+
+.log-footer {
+  padding-top: 28px;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Categories
+   ========================================================================== */
+.categories {
+  padding: 48px 24px;
+}
+.categories h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin: 0 0 24px;
+}
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.cat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 16px;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.cat-card:hover {
+  border-color: var(--dawn);
+  transform: translateY(-2px);
+}
+.cat-time {
+  font-size: 0.8rem;
+  color: var(--teal);
+  font-weight: 500;
+}
+.cat-name {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Subscribe
+   ========================================================================== */
+.subscribe {
+  padding: 48px 24px 80px;
+}
+.subscribe-inner {
+  background: var(--teal-deep);
+  color: var(--paper-raised);
+  border-radius: var(--radius);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.subscribe-inner h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin: 0 0 6px;
+}
+.subscribe-inner p {
+  margin: 0;
+  color: var(--dawn-soft);
+  font-size: 0.92rem;
+}
+
+.subscribe-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.subscribe-form input {
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--teal);
+  background: var(--paper-raised);
+  font-family: var(--font-body);
+  font-size: 0.94rem;
+  min-width: 220px;
+}
+.subscribe-form input:focus {
+  outline: 2px solid var(--dawn);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 28px 0;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-inner p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+.footer-nav {
+  display: flex;
+  gap: 20px;
+}
+.footer-nav a {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+.footer-nav a:hover { color: var(--dawn); }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 760px) {
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  .subscribe-inner { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 640px) {
+  .site-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--paper-raised);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    gap: 0;
+    display: none;
+  }
+  .site-nav.open { display: flex; }
+  .site-nav a {
+    padding: 14px 24px;
+    border-top: 1px solid var(--line);
+  }
+  .nav-toggle { display: flex; }
+
+  .entry {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .entry-time {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .hero { padding: 48px 20px 32px; }
+}
+
+</style>
 </head>
 <body>
 
@@ -62,7 +530,7 @@
       </div>
       <div class="entry-body">
         <p class="entry-tag">Morning routines</p>
-        <h3><a href="articles/first-10-minutes.html">The five-minute rule that fixed my mornings</a></h3>
+        <h3><a href="#">The five-minute rule that fixed my mornings</a></h3>
         <p>You don't need a two-hour routine. You need one small thing you can't talk yourself out of — here's how to find yours.</p>
       </div>
     </article>
@@ -74,7 +542,7 @@
       </div>
       <div class="entry-body">
         <p class="entry-tag">Habit-building</p>
-        <h3><a href="articles/habit-tracker.html">Why your habit tracker is quietly working against you</a></h3>
+        <h3><a href="#">Why your habit tracker is quietly working against you</a></h3>
         <p>Streaks feel motivating until the day you break one. A steadier way to measure progress that survives a bad week.</p>
       </div>
     </article>
@@ -86,7 +554,7 @@
       </div>
       <div class="entry-body">
         <p class="entry-tag">Personal growth</p>
-        <h3><a href="articles/boring-discipline.html">The boring version of discipline actually works</a></h3>
+        <h3><a href="#">The boring version of discipline actually works</a></h3>
         <p>No cold plunges, no 4 a.m. wake-ups. What steady, unglamorous progress actually looks like day to day.</p>
       </div>
     </article>
@@ -99,19 +567,19 @@
   <section class="categories wrap" aria-label="Categories">
     <h2>Browse by category</h2>
     <div class="cat-grid">
-      <a class="cat-card" href="categories.html">
+      <a class="cat-card" href="#">
         <span class="cat-time mono">AM</span>
         <span class="cat-name">Morning Routines</span>
       </a>
-      <a class="cat-card" href="categories.html">
+      <a class="cat-card" href="#">
         <span class="cat-time mono">21d</span>
         <span class="cat-name">Habit-Building</span>
       </a>
-      <a class="cat-card" href="categories.html">
+      <a class="cat-card" href="#">
         <span class="cat-time mono">∞</span>
         <span class="cat-name">Personal Growth</span>
       </a>
-      <a class="cat-card" href="categories.html">
+      <a class="cat-card" href="#">
         <span class="cat-time mono">PM</span>
         <span class="cat-name">Evening Resets</span>
       </a>
@@ -136,20 +604,7 @@
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
-    <div>
-      <p>© 2026 MindShift Daily. Small shifts, daily.</p>
-      <div class="social-icons">
-        <a href="https://wa.me/923499314726" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.6 6.3A8.9 8.9 0 0 0 3.7 17l-1 3.9 4-1a8.9 8.9 0 0 0 12.9-8A8.8 8.8 0 0 0 17.6 6.3z"/><path d="M8.4 9.3c-.2.4-.6 1.4-.2 2.6.5 1.6 2.6 3.7 4.2 4.2 1.2.4 2.2 0 2.6-.2"/></svg>
-        </a>
-        <a href="FACEBOOK_LINK_HERE" target="_blank" rel="noopener" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9h3V5h-3c-2 0-3.5 1.5-3.5 3.5V11H8v4h2.5v6h4v-6H17l.5-4h-3.5V9c0-.5.3-.8.8-.8z"/></svg>
-        </a>
-        <a href="INSTAGRAM_LINK_HERE" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.3"/><circle cx="16.4" cy="7.6" r="0.8" fill="currentColor" stroke="none"/></svg>
-        </a>
-      </div>
-    </div>
+    <p>© 2026 MindShift Daily. Small shifts, daily.</p>
     <nav class="footer-nav">
       <a href="privacy.html">Privacy</a>
       <a href="disclaimer.html">Disclaimer</a>
@@ -158,6 +613,32 @@
   </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script>
+// Mobile nav toggle
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.site-nav');
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+
+  // Subscribe form: front-end only placeholder.
+  // Connect this to Formspree/Getform (or similar) to actually collect emails.
+  const form = document.querySelector('.subscribe-form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email');
+      alert(`Thanks! (Demo only — connect this form to Formspree or Getform to actually collect: ${email.value})`);
+      form.reset();
+    });
+  }
+});
+
+</script>
 </body>
 </html>
